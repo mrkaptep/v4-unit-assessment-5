@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import logo from './../../assets/helo_logo.png';
 import './Auth.css';
+import {connect} from 'react-redux';
+import {updateUser} from './../../redux/reducer';
 
 class Auth extends Component {
   constructor(props) {
@@ -25,6 +27,8 @@ class Auth extends Component {
     axios.post('/api/auth/login', this.state)
       .then(res => {
         //code here
+        this.props.dispatch(updateUser(res.data))
+        this.props.history.push("/dash")
       })
       .catch(err => {
         console.log(err)
@@ -36,6 +40,8 @@ class Auth extends Component {
     axios.post('/api/auth/register', this.state)
       .then(res => {
         //code here
+        this.props.dispatch(updateUser(res.data))
+        this.props.history.push("/dash")
       })
       .catch(err => {
         console.log(err)
@@ -54,7 +60,7 @@ class Auth extends Component {
   render() {
     return (
       <div className='auth'>
-        <div className='auth-container'>
+        <div className='auth-container auth-media'>
           <img src={logo} alt='logo' />
           <h1 className='auth-title'>Helo</h1>
           {this.state.errorMsg && <h3 className='auth-error-msg'>{this.state.errorMsg} <span onClick={this.closeErrorMessage}>X</span></h3>}
@@ -76,4 +82,4 @@ class Auth extends Component {
   }
 }
 
-export default Auth;
+export default connect()(Auth);

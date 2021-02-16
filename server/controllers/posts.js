@@ -1,5 +1,6 @@
 module.exports = {
     readPosts: async (req, res) => {
+      console.log(req.session)
       let { id } = req.session.user;
       let { mine, search, oldest } = req.query;
       const db = await req.app.get('db')
@@ -37,8 +38,18 @@ module.exports = {
         }
       }
     },
-    createPost: (req, res) => {
+    createPost: async (req, res) => {
       //code here
+      let { id } = req.session.user;
+      let{title, img, content} = req.body;
+      let db = await req.app.get('db');
+      let date = new Date;
+      if(id){
+        db.post.create_post([id, title, img, content, date])
+          .then(posts => res.status(200).send(posts))
+      } else {
+        res.status(403).send('forbidden');
+      }
     },
     readPost: (req, res) => {
       req.app.get('db').post.read_post(req.params.id)

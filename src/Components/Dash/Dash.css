@@ -16,6 +16,13 @@
   align-items: center;
   width: 55%;
 }
+.media-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
 
 .dash-search-bar {
   height: 25px;

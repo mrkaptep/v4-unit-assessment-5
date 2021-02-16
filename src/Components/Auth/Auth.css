@@ -25,6 +25,7 @@
     position: relative;
   }
 
+
   .auth-title {
     font-size: 80px;
     font-weight: 700;
@@ -70,4 +71,21 @@
     display: flex;
     justify-content: space-around;
     width: 55%;
+  }
+
+  @media screen and (max-width:880px) {
+    .auth-container {
+      width: 45vw;
+      height: 55vh;
+      min-width: 200px;
+      box-shadow: none;
+      background-image: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      padding: 20px;
+      position: relative;
+    }
+  
   }
